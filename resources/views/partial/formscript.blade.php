@@ -1,5 +1,5 @@
-<script src="lib/jquery.min.js"></script>
-  <script src="lib/bootstrap.min.js"></script>
+<script src="{{ asset('lib/jquery.min.js')}}"></script>
+  <script src="{{ asset('lib/bootstrap.min.js')}}"></script>
   <!--BACKSTRETCH-->
   <!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
   <script type="text/javascript" src="{{asset('lib/jquery.backstretch.min.js')}}"></script>

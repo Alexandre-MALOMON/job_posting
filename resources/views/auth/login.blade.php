@@ -30,8 +30,8 @@ LOGIN
                     <hr>
                     <div class="login-social-link centered">
                         <p>or you can sign in via your social network</p>
-                        <button class="btn btn-facebook" type="submit"><i class="fa fa-facebook"></i> Facebook</button>
-                        <button class="btn btn-danger" type="submit"><i class="fa fa-google"></i> Google</button>
+                        <!-- <button class="btn btn-facebook" type="submit"><i class="fa fa-facebook"></i> Facebook</button> -->
+                        <p class="btn btn-theme btn-block btn-twitter"  ><i class="fa fa-linkedin"></i> <a href="{{ url('auth/linkedin') }}"> Linkedin</a></p>
                     </div>
                     <div class="registration">
                         Don't have an account yet?<br />
