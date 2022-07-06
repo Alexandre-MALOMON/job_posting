@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 class WebsiteController extends Controller
 {
+    public function acceuill(){
+        return view('website.index');
+    }
     public function job(){
         return view('website.job');
     }

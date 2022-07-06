@@ -20,6 +20,7 @@ Route::middleware(['auth'])->group(function(){
 //Routes publique
 Route::middleware(['guest'])->group(function(){
     //job
+    Route::get('/','WebsiteController@acceuill')->name('website.index');
     Route::get('website/job','WebsiteController@job')->name('website.job');
     Route::get('website/about','WebsiteController@about')->name('website.about');
     Route::get('website/contact','WebsiteController@contact')->name('website.contact');
@@ -27,9 +28,6 @@ Route::middleware(['guest'])->group(function(){
 
 });
 
-Route::get('/', function () {
-    return view('website/index');
-});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
