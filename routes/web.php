@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\LinkedinController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,19 +14,24 @@ use Illuminate\Support\Facades\Route;
 */
 //Route protégée
 Route::middleware(['auth'])->group(function(){
+    //entreprise
+    Route::resource('entreprise', EntrepriseController::class);
+    Route::resource('chercheur', ChercheurController::class);
+    Route::resource('user', InfosController::class);
 
 
 });
 //Routes publique
-Route::middleware(['guest'])->group(function(){
     //job
     Route::get('/','WebsiteController@acceuill')->name('website.index');
     Route::get('website/job','WebsiteController@job')->name('website.job');
     Route::get('website/about','WebsiteController@about')->name('website.about');
     Route::get('website/contact','WebsiteController@contact')->name('website.contact');
+    //linkedin
+    Route::get('auth/linkedin', [LinkedinController::class, 'linkedinRedirect']);
+    Route::get('auth/linkedin/callback', [LinkedinController::class, 'linkedinCallback']);
 
 
-});
 
 
 Route::get('/dashboard', function () {
