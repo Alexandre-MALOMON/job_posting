@@ -13,13 +13,16 @@ use App\Http\Controllers\LinkedinController;
 |
 */
 //Route protégée
-Route::middleware(['auth'])->group(function(){
+Route::middleware(['auth','entreprise'])->group(function(){
     //entreprise
     Route::resource('entreprise', EntrepriseController::class);
+    Route::resource('user', InfosController::class);
+});
+//chercheur
+Route::middleware(['auth','cherheur'])->group(function(){
+    //entreprise
     Route::resource('chercheur', ChercheurController::class);
     Route::resource('user', InfosController::class);
-
-
 });
 //Routes publique
     //job
