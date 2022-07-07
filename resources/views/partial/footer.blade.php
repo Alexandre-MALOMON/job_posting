@@ -5,10 +5,10 @@
                     <div class="col-md-4 col-sm-6">
                          <div class="footer-info">
                               <div class="section-title">
-                                   <h2>Headquarter</h2>
+                                   <h2>Addresse</h2>
                               </div>
                               <address>
-                                   <p>212 Barrington Court <br>New York, ABC 10001</p>
+                                   <p>212 Cotonou <br>Bénin, ABC 10001</p>
                               </address>
 
                               <ul class="social-icon">
@@ -18,8 +18,7 @@
                               </ul>
 
                               <div class="copyright-text">
-                                   <p>Copyright &copy; 2020 Company Name</p>
-                                   <p>Template by: <a href="https://www.phpjabbers.com/">PHPJabbers.com</a></p>
+                                   <p>Copyright &copy; {{date('Y')}} Job Search</p>
                               </div>
                          </div>
                     </div>
@@ -30,8 +29,8 @@
                                    <h2>Contact Info</h2>
                               </div>
                               <address>
-                                   <p>+1 333 4040 5566</p>
-                                   <p><a href="mailto:contact@company.com">contact@company.com</a></p>
+                                   <p>+299 65321025</p>
+                                   <p><a href="mailto:contact@Job_postin.com">contact@Job_posting.com</a></p>
                               </address>
 
                               <div class="footer_menu">
@@ -49,7 +48,7 @@
                     <div class="col-md-4 col-sm-12">
                          <div class="footer-info newsletter-form">
                               <div class="section-title">
-                                   <h2>Newsletter Signup</h2>
+                                   <h2>Newsletter</h2>
                               </div>
                               <div>
                                    <div class="form-group">

@@ -18,16 +18,16 @@
                     </button>
 
                     <!-- lOGO TEXT HERE -->
-                    <a href="#" class="navbar-brand">Jobs Agency</a>
+                    <a href="#" class="navbar-brand">Job Search</a>
                </div>
 
                <!-- MENU LINKS -->
                <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-nav-first">
-                         <li class="active"><a href="/">Home</a></li>
-                         <li><a href="{{ route('website.job')}}">Jobs</a></li>
-                         <li><a href="{{ route('website.about')}}">About Us</a></li>
-                         <li><a href="{{ route('website.contact')}}">Contact Us</a></li>
+                         <li class="{{request()->is('/')  ? 'active' : '' }}"><a href="/">Home</a></li>
+                         <li class="{{request()->is('website/job')  ? 'active' : '' }}"><a href="{{ route('website.job')}}">Jobs</a></li>
+                         <li  class="{{request()->is('website/about')  ? 'active' : '' }}"><a href="{{ route('website.about')}}">About Us</a></li>
+                         <li  class="{{request()->is('website/contact')  ? 'active' : '' }}"><a href="{{ route('website.contact')}}">Contact Us</a></li>
                          @auth
 
 
@@ -41,7 +41,7 @@
                               </ul>
                          </li>
                          @else
-                         <li><a href="{{ route('register')}}">Connectez-vous</a></li>
+                            <li  class="{{request()->is('register')  ? 'active' : '' }}"><a href="{{ route('register')}}">Connectez-vous</a></li>
                          @endauth
                     </ul>
                </div>

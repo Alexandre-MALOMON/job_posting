@@ -41,12 +41,12 @@
 
                     <div class="col-md-6 col-sm-12">
                          <div class="contact-image">
-                              <img src="images/contact-1-600x400.jpg" class="img-responsive" alt="">
+                              <img src="{{ asset('images/contact-1-600x400.jpg')}}" class="img-responsive" alt="">
                          </div>
                     </div>
 
                </div>
           </div>
-     </section>   
+     </section>
 
 @endsection
