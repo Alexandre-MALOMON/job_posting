@@ -33,7 +33,9 @@ Route::middleware(['auth','cherheur'])->group(function(){
     //linkedin
     Route::get('auth/linkedin', [LinkedinController::class, 'linkedinRedirect']);
     Route::get('auth/linkedin/callback', [LinkedinController::class, 'linkedinCallback']);
-
+    Route::fallback(function() {
+        return view('404'); // la vue 404.blade.php
+     });
 
 
 
