@@ -15,7 +15,7 @@ class CreateChercheursTable extends Migration
     {
         Schema::create('chercheurs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('photo');
             $table->string('cv');
             $table->string('description');

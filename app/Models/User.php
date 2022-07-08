@@ -57,12 +57,12 @@ class User extends Authenticatable
     ];
 
     public function entreprise(){
-        return $this->hasMany(Entreprise::class);
+        return $this->hasOne(Entreprise::class);
 
     }
 
-    public function chercheru(){
-        return $this->hasMany(Chercheur::class);
+    public function chercheur(){
+        return $this->hasOne(Chercheur::class);
 
     }
 }
