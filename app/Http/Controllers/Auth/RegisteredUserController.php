@@ -45,8 +45,7 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'addresse_ip',
         ]);
-            $addresse_ip = $_SERVER['REMOTE_ADDR'];
-           // dd($addresse_ip);
+            
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -56,7 +55,7 @@ class RegisteredUserController extends Controller
             'activite' => $request->activite,
             'sexe' => $request->sexe,
             'password' => Hash::make($request->password),
-            'addresse_ip' => $addresse_ip,
+            'addresse_ip' => $request->ip(),
         ]);
 
         event(new Registered($user));

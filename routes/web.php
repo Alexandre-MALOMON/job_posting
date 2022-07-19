@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LinkedinController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,24 +13,44 @@ use App\Http\Controllers\LinkedinController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-//Route protégée
+//Route protégée//entreprise
 Route::middleware(['auth','entreprise'])->group(function(){
-    //entreprise
+    Route::get('confirme/postuler', 'ConfirmeController@exportPostulerListToExcel')->name('export.postuler');
+    Route::get('confirme/show/{confirme}', 'ConfirmeController@liredoc')->name('confirme.show');
+    Route::put('confirme/update/{confirme}', 'ConfirmeController@update')->name('confirme.update');
+    Route::get('confirme', 'ConfirmeController@index')->name('confirme');
     Route::resource('entreprise', EntrepriseController::class);
-    Route::resource('user', InfosController::class);
+    //Route::resource('job', JobController::class);
+    Route::resource('job', EmploieController::class);
 });
 //chercheur
 Route::middleware(['auth','cherheur'])->group(function(){
-    //entreprise
+
     Route::resource('chercheur', ChercheurController::class);
-    Route::resource('user', InfosController::class);
+});
+
+Route::middleware(['auth'])->group( function(){
+//postuler sur les offres
+Route::post('postuler','WebsiteController@postuler')->name('website.postuler');
+Route::get('website/apply/{job}','WebsiteController@apply')->name('website.apply');
+Route::get('website/profil','WebsiteController@profil')->name('website.profil');
+Route::resource('user', InfosController::class);
+Route::get('mission','WebsiteController@mission')->name('mission');
+//conversation
+
+Route::get('conversations','ConversationController@index')->name('conversation.index');
+Route::get('conversations/show/{conversation}','ConversationController@show')->name('conversation.show');
+
 });
 //Routes publique
     //job
+
     Route::get('/','WebsiteController@acceuill')->name('website.index');
     Route::get('website/job','WebsiteController@job')->name('website.job');
     Route::get('website/about','WebsiteController@about')->name('website.about');
     Route::get('website/contact','WebsiteController@contact')->name('website.contact');
+    //savoir plus sur les offres
+    Route::get('website/showjob/{job}','WebsiteController@showjob')->name('website.showjob');
     //linkedin
     Route::get('auth/linkedin', [LinkedinController::class, 'linkedinRedirect']);
     Route::get('auth/linkedin/callback', [LinkedinController::class, 'linkedinCallback']);

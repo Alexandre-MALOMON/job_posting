@@ -1,14 +1,7 @@
 <!DOCTYPE html>
         <html lang="en">
-
-        <head>
-                <meta charset="UTF-8">
-                <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Document</title>
-                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        </head>
-
+        <title>{{Auth::user()->name}}</title>
+@include('partial.header')
         <body>
                 <div class="info">
                         <div>
@@ -46,11 +39,14 @@
                                         <label for="exampleInputPassword1" class="form-label">Site web</label>
                                         <input type="url" name="site_web" class="form-control" id="exampleInputPassword1" >
                                 </div>
-                                <div class="form-outline mb-4">
+                                <div class="form-outline mb-4" style="margin-bottom:10px;">
                                         <label class="form-label" for="form6Example7">Description de l'entreprise</label>
                                         <textarea name="description" class="form-control" id="form6Example7" rows="4"></textarea>
+                                </div><br>
+                                <div>
+                                    <button type="submit" class="btn btn-primary" name="entreprise">Enrégistrer</button>
                                 </div>
-                                <button type="submit" class="btn btn-primary" name="entreprise">Enrégistrer</button>
+
 
                         </form>
                 </div>

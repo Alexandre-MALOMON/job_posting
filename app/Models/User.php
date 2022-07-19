@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Entreprise;
+use App\Models\Chercheur;
 
 class User extends Authenticatable
 {
@@ -64,5 +66,16 @@ class User extends Authenticatable
     public function chercheur(){
         return $this->hasOne(Chercheur::class);
 
+    }
+
+    public function conversations(){
+        return Conversation::where(function($q){
+            return $q->where('to', $this->id)
+            ->orWhere('from',$this->id);
+        });
+    }
+
+    public function getConversationAttribute(){
+        return $this->conversations()->get();
     }
 }

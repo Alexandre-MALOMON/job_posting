@@ -10,7 +10,7 @@ LOGIN
 
 
             <form method="POST" class="form-login" action="{{ route('login') }}">
-                @csrf
+                 @csrf
                 <h2 class="form-login-heading">login now</h2>
                 <!-- Validation Errors -->
                 <x-auth-validation-errors class="mb-4" :errors="$errors" />

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Emploie;
 use App\Models\Entreprise;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,9 +16,11 @@ class EntrepriseController extends Controller
      */
     public function index()
     {
-        $entreprise = Entreprise::where('user_id', Auth::user()->id)->get();
+        $jobs = Emploie::where('user_id', Auth::user()->id)
+                            ->orderBy('created_at','desc')
+                        ->paginate(6);
        // dd($entreprises);
-        return view('entreprise.index',compact('entreprise'));
+        return view('entreprise.index',compact('jobs'));
     }
 
     /**
@@ -38,8 +41,8 @@ class EntrepriseController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'user_id',
+        $this->validate($request, [
+            'user_id' =>'unique:entreprises',
             'company'=>'required|unique:entreprises',
             'logo' => 'required|mimes:png,jpg,jpeg',
             'phone' => 'required',
@@ -55,13 +58,13 @@ class EntrepriseController extends Controller
             $entreprise = Auth::user()->id;
             $user->user_id =  $entreprise;
             $user->company = $request->company;
-             if ($request->photo) {
-                $file = $request->file('photo');
+            if ($request->logo) {
+                $file = $request->file('logo');
                 $filename=time(). '.' .$file->getClientOriginalExtension();
-                $request->photo->move('storage/entreprise/', $filename);
-                $user->photo = '/storage/entreprise/'.$filename;
+                $request->logo->move('storage/entreprise/', $filename);
+                $user->logo = '/storage/entreprise/'.$filename;
             }
-            $user->logo = $request->logo;
+            //$user->logo = $request->logo;
             $user->phone = $request->phone;
             $user->email = $request->email;
             $user->localisation= $request->localisation;
@@ -81,9 +84,9 @@ class EntrepriseController extends Controller
      * @param  \App\Models\Entreprise  $entreprise
      * @return \Illuminate\Http\Response
      */
-    public function show(Entreprise $entreprise)
+    public function show()
     {
-        //
+        return view('entreprise.show',compact('entreprise'));
     }
 
     /**

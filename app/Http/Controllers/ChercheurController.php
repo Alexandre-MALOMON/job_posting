@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Chercheur;
+use App\Models\Emploie;
+use App\Models\Postuler;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +18,13 @@ class ChercheurController extends Controller
      */
     public function index()
     {
-        return view('chercheur.index');
+        $poste_emploies = Emploie::Join('postulers','emploies.id','=','postulers.emploie_id')
+                        ->select('emploies.title','emploies.photo','emploies.responsabilities',
+                        'emploies.salary','emploies.dure','postulers.user_id','postulers.status','postulers.created_at')
+                        ->where('postulers.user_id','=',Auth::user()->id)
+                        ->orderBy('postulers.created_at','desc')->paginate(8);
+       // dd($poste_emploies);
+        return view('chercheur.index',compact('poste_emploies'));
     }
 
     /**
@@ -37,7 +46,7 @@ class ChercheurController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'user_id',
+            'user_id' =>'unique:chercheurs',
             'photo'=>'required|mimes:png,jpg,jpeg',
             'cv' => 'required|mimes:pdf',
             'description' => 'required',
@@ -53,7 +62,7 @@ class ChercheurController extends Controller
                 $file = $request->file('photo');
                 $filename=time(). '.' .$file->getClientOriginalExtension();
                 $request->photo->move('storage/chercheur/photo/', $filename);
-                $user->photo = '/storage/chercheur/photo'.$filename;
+                $user->photo = '/storage/chercheur/photo/'.$filename;
             }
             if ($request->cv) {
                 $file = $request->file('cv');

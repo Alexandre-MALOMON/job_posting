@@ -11,89 +11,48 @@ Job
                     <h2>Featured Jobs <small>Lorem ipsum dolor sit amet.</small></h2>
                 </div>
             </div>
+            @forelse ($jobs as $job)
+
 
             <div class="col-md-4 col-sm-4">
                 <div class="courses-thumb courses-thumb-secondary">
                     <div class="courses-top">
                         <div class="courses-image">
+                            @if ($job->photo == "?")
                             <img src="{{ asset('images/product-1-720x480.jpg')}}" class="img-responsive" alt="">
+                            @else
+                            <img src="{{ $job->photo}}" class="img-responsive" alt="" style="width: 500px; height:240px;">
+                            @endif
+
                         </div>
                         <div class="courses-date">
-                            <span title="Posted on"><i class="fa fa-calendar"></i> 15-06-2020</span>
+                            <span title="Posted on"><i class="fa fa-calendar"></i> {{ date('m-d-Y', strtotime($job->created_at))}}</span>
                             <span title="Location"><i class="fa fa-map-marker"></i> London</span>
                             <span title="Type"><i class="fa fa-file"></i> Contract</span>
                         </div>
                     </div>
 
                     <div class="courses-detail">
-                        <h3><a href="job-details.html">Lorem ipsum dolor sit amet</a></h3>
+                        <h3><a href="job-details.html">{{$job->title}}</a></h3>
 
-                        <p class="lead"><strong>$60 000</strong></p>
+                        <p class="lead"><strong>{{$job->salary}}</strong></p>
 
-                        <p>Medical / Health Jobs for <strong>BMI Kings Park Hospital</strong></p>
+                        <p>{{$job->responsabilities}}</p>
                     </div>
 
                     <div class="courses-info">
-                        <a href="job-details.html" class="section-btn btn btn-primary btn-block">View Details</a>
+                        <a href="{{ route('website.showjob', $job->id) }}" class="section-btn btn btn-primary btn-block">View Details</a>
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-4 col-sm-4">
-                <div class="courses-thumb courses-thumb-secondary">
-                    <div class="courses-top">
-                        <div class="courses-image">
-                            <img src="{{ asset('images/product-2-720x480.jpg')}}" class="img-responsive" alt="">
-                        </div>
-                        <div class="courses-date">
-                            <span title="Posted on"><i class="fa fa-calendar"></i> 15-06-2020</span>
-                            <span title="Location"><i class="fa fa-map-marker"></i> London</span>
-                            <span title="Type"><i class="fa fa-file"></i> Contract</span>
-                        </div>
-                    </div>
-
-                    <div class="courses-detail">
-                        <h3><a href="job-details.html">Lorem ipsum dolor sit amet</a></h3>
-
-                        <p class="lead"><strong>$60 000</strong></p>
-
-                        <p>Medical / Health Jobs for <strong>BMI Kings Park Hospital</strong></p>
-                    </div>
-
-                    <div class="courses-info">
-                        <a href="job-details.html" class="section-btn btn btn-primary btn-block">View Details</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-sm-4">
-                <div class="courses-thumb courses-thumb-secondary">
-                    <div class="courses-top">
-                        <div class="courses-image">
-                            <img src="{{ asset('images/product-3-720x480.jpg')}}" class="img-responsive" alt="">
-                        </div>
-                        <div class="courses-date">
-                            <span title="Posted on"><i class="fa fa-calendar"></i> 15-06-2020</span>
-                            <span title="Location"><i class="fa fa-map-marker"></i> London</span>
-                            <span title="Type"><i class="fa fa-file"></i> Contract</span>
-                        </div>
-                    </div>
-
-                    <div class="courses-detail">
-                        <h3><a href="job-details.html">Lorem ipsum dolor sit amet</a></h3>
-
-                        <p class="lead"><strong>$60 000</strong></p>
-
-                        <p>Medical / Health Jobs for <strong>BMI Kings Park Hospital</strong></p>
-                    </div>
-
-                    <div class="courses-info">
-                        <a href="job-details.html" class="section-btn btn btn-primary btn-block">View Details</a>
-                    </div>
-                </div>
-            </div>
-
+            @empty
+                <p>Pas d'offre </p>
+            @endforelse
         </div>
     </div>
+    <div style="text-align: center; font-weight: bold;">
+        <p>{{$jobs->links()}}</p>
+    </div>
+
 </section>
 @endsection

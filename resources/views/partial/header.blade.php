@@ -16,5 +16,8 @@
 
      <!-- MAIN CSS -->
      <link rel="stylesheet" href="{{asset('csss/style.css')}}">
+    <!-- sweet alert -->
+   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+   @livewireStyles
 
 </head>
