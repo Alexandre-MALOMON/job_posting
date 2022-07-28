@@ -31,6 +31,8 @@ Route::middleware(['auth','cherheur'])->group(function(){
 
 Route::middleware(['auth'])->group( function(){
 //postuler sur les offres
+Route::post('raiting','RatingController@store')->name('raiting.store');
+
 Route::post('postuler','WebsiteController@postuler')->name('website.postuler');
 Route::get('website/apply/{job}','WebsiteController@apply')->name('website.apply');
 Route::get('website/profil','WebsiteController@profil')->name('website.profil');

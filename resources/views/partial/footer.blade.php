@@ -36,10 +36,10 @@
                               <div class="footer_menu">
                                    <h2>Quick Links</h2>
                                    <ul>
-                                        <li><a href="index.html">Home</a></li>
-                                        <li><a href="about-us.html">About Us</a></li>
-                                        <li><a href="terms.html">Terms & Conditions</a></li>
-                                        <li><a href="contact.html">Contact Us</a></li>
+                                        <li><a href="#home">Home</a></li>
+                                        <li><a href="#about">About Us</a></li>
+                                        <li><a href="#terms">Terms & Conditions</a></li>
+                                        <li><a href="#contact">Contact Us</a></li>
                                    </ul>
                               </div>
                          </div>

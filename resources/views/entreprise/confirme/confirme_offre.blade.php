@@ -11,7 +11,7 @@
         <div class="col-md-7 mt-4">
           <div class="card">
             <div class="card-header pb-0 px-3">
-              <h6 class="mb-0">Billing Information</h6>
+              <h6 class="mb-0">Postulant</h6>
             </div>
             <div class="card-body pt-4 p-3">
               <ul class="list-group">
@@ -36,7 +36,11 @@
                         @else
                         <span disabled class="btn btn-success font-weight-bold " style="margin-bottom: 10px;"> {{$confirme->status}} </span>
                         @endif
+                        @if ($confirme->status == 'Accepter')
+                        <a href="#" class="btn btn-info" data-toggle="modal" data-target="#ModalNote{{$confirme->id}}">Noté</a>
+                        @include('ratin.Notechercheur')
 
+                        @endif
                     </span><br>
 
                   </div>
@@ -55,7 +59,10 @@
 </div>
 <div style="text-align: center;font-weight: bold;">
     <p >{{$confirmes->links()}}</p>
-    <a href="{{ route('export.postuler')}}?id={{$offre}}">Exporter</a>
+    @if ($confirmes->count() > 0)
+         <a href="{{ route('export.postuler')}}?id={{$offre}}">Exporter</a>
+    @endif
+
 </div>
  </section>
 

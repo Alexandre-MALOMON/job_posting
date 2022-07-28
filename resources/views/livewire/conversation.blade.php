@@ -1,4 +1,5 @@
 <div class="body">
+    
     <h3 class="phrase">Mission:{{$conversation->emploie->title}}</h3>
     <div>
         @foreach ($conversation->messages as $message)

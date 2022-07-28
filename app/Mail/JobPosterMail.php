@@ -28,12 +28,12 @@ class JobPosterMail extends Mailable
     }
 
     /**
-     * Build the message. 
+     * Build the message.
      *
      * @return $this
      */
     public function build()
     {
-        return $this->subject('Offre d\emploie Job seach')->view('emails.jobmail');
+        return $this->subject("Offre d'emploie Job seach")->view('emails.jobmail');
     }
 }

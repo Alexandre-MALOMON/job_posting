@@ -44,14 +44,13 @@
                          <li>
                          <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <a :href="route('logout')"
+                           <li> <a :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 Déconnexion
-                            </a>
+                            </a></li>
                         </form>
                          </li>
-                         <li><a href="terms.html">Terms</a></li>
                      </ul>
                  </li>
                  @else

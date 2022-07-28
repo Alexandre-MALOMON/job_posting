@@ -67,6 +67,9 @@ class User extends Authenticatable
         return $this->hasOne(Chercheur::class);
 
     }
+    public function emploie(){
+        return $this->belongsTo(Emploie::class);
+    }
 
     public function conversations(){
         return Conversation::where(function($q){

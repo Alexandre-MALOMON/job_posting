@@ -86,7 +86,7 @@
 							<td data-bgcolor="bg-module" bgcolor="#eaeced">
 								<table class="flexible" width="600" align="center" style="margin:0 auto;" cellpadding="0" cellspacing="0">
 									<tr>
-										<td class="img-flex"><img src="{{$data['photo']}}" style="vertical-align:top;" width="600" height="306" alt="" /></td>
+										<td class="img-flex"><img src="{{asset($data['photo'])}}" style="vertical-align:top;" width="600" height="306" alt="" /></td>
 									</tr>
 									<tr>
 										<td data-bgcolor="bg-block" class="holder" style="padding:58px 60px 52px;" bgcolor="#f9f9f9">

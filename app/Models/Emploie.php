@@ -19,4 +19,10 @@ class Emploie extends Model
         'salary',
         'dure'
 ];
+
+public function users(){
+    return $this->hasMany(User::class);
+
 }
+}
+

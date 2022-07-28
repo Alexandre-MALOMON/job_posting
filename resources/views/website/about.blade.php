@@ -4,7 +4,7 @@
     A propos
 @endsection
 @section('content')
-<section>
+<section id="about">
           <div class="container">
                <div class="text-center">
                     <h1>About Us</h1>

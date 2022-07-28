@@ -6,6 +6,7 @@ use App\Models\Chercheur;
 use App\Models\Emploie;
 use App\Models\Entreprise;
 use App\Models\Postuler;
+use App\Models\Rating;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -51,7 +52,9 @@ class WebsiteController extends Controller
        // dd($profils);
         }
 
-        return view('website.profil',compact('profils'));
+        $ratings = Rating::where('examiner',Auth::user()->id)->sum('rate');
+        $count = Rating::where('examiner',Auth::user()->id)->count();
+        return view('website.profil',compact('profils','ratings','count'));
     }
 
     public function postuler(Request $request){

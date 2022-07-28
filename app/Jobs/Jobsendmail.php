@@ -20,18 +20,18 @@ class Jobsendmail implements ShouldQueue
 
     public $created_job;
     public $usersjobs;
-   // public $secteur;
+    public $secteur;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(Emploie $job ,$usersjobs)
+    public function __construct(Emploie $job ,$usersjobs,$secteur)
     {
         $this->created_job=$job;
         $this->usersjobs =$usersjobs;
-        //$this->secteur = $secteur;
-       // dd($this->secteur);
+        $this->secteur = $secteur;
+
 
     }
 
@@ -43,10 +43,13 @@ class Jobsendmail implements ShouldQueue
     public function handle()
     {
 
-
         foreach ( $this->usersjobs as $usersjob) {
-            
-                Mail::to($usersjob->email)->send(new JobPosterMail($this->created_job));
+                if ($usersjob->activite == $this->secteur) {
+                   Mail::to($usersjob->email)->send(new JobPosterMail($this->created_job));
+                }else{
+                    echo "Bonjour";
+                }
+
        }
     }
 }

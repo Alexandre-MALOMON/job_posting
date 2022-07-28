@@ -23,7 +23,7 @@
                <div class="row">
 
                     <div class="col-md-6 col-sm-12">
-                         <form id="contact-form" role="form" action="" method="post">
+                         <form id="contact-form" role="form" action="" >
                               <div class="col-md-12 col-sm-12">
                                    <input type="text" class="form-control" placeholder="Enter full name" name="name" required>
 

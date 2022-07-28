@@ -44,7 +44,7 @@ class EmploieController extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
-            'photo',
+            'photo' => 'mimes:png,jpg,jpeg',
             'secteur' => 'required',
             'responsabilities' => 'required',
             'qualification' => 'required',
@@ -73,8 +73,7 @@ class EmploieController extends Controller
     $secteur=$request->secteur;
     $job->save();
     $usersjobs = User::all();
-    //dd("ici");
-            Jobsendmail::dispatch($job, $usersjobs);
+            Jobsendmail::dispatch($job, $usersjobs, $secteur);
     return redirect()->route('entreprise.index');
     }
 
@@ -111,36 +110,7 @@ class EmploieController extends Controller
      */
     public function update(Request $request, Emploie $emploie)
     {
-        $this->validate($request, [
-            'title' => 'required',
-            'photo',
-            'responsabilities' => 'required',
-            'qualification' => 'required',
-            'description' => 'required',
-            'salary' => 'required',
-            'dure' => 'required',
-
-        ]);
-
-        $user=Auth::user()->id;
-        $emploie = new Emploie();
-        $emploie->user_id = $user;
-        $emploie->title = $request->title;
-        if ($request->photo) {
-            $file = $request->hasFile('photo');
-            $filename=time(). '.' .$file->getClientOriginalExtension();
-            $request->photo->move('storage/entreprise/', $filename);
-            $user->photo = '/storage/entreprise/'.$filename;
-        }
-        $emploie->responsabilities = $request->responsabilities;
-        $emploie->description = $request->description;
-        $emploie->qualification = $request->qualification;
-        $emploie->salary = $request->salary;
-        $emploie->dure = $request->dure;
-
-        $emploie->save();
-
-        return redirect()->route('entreprise.index');
+        //
     }
 
     /**

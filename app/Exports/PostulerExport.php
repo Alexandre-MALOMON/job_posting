@@ -12,7 +12,8 @@ class PostulerExport implements FromCollection
     */
     public function collection()
     {
-        return Postuler::select('lettre')->get();
+
+        return Postuler::select('cv','lettre','status')->get();
     }
 
     public function headings(): array {

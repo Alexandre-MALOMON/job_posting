@@ -59,13 +59,17 @@ Details
                     </div>
                </div>
                <div class="clearfix">
-
+                    @auth
                     @if ($job->user_id != Auth::user()->id)
 
                     <a href="{{ route('website.apply',$job->id)}}" class="section-btn btn btn-primary pull-left">Apply for this job</a>
                     @endif
+                    @else
+                        Veuillez vous connecté
+                    @endauth
 
-               
+
+
 
 
 

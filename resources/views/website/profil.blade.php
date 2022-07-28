@@ -23,7 +23,7 @@
             <form action="#" method="post" class="form">
                 <h2>{{$profil->company}}</h2>
 
-                <p class="lead"><strong class="text-primary">$2000</strong> <small> per year</small></p>
+                <p class="lead"><strong class="text-primary">{{$ratings}}</strong> <small> Note</small></p>
 
                 <p class="lead">
                     <i class="fa fa-briefcase"></i> {{$profil->site_web}} &nbsp;&nbsp;
@@ -52,18 +52,19 @@
             <form action="#" method="post" class="form">
                 <h2>{{Auth::user()->name}}</h2>
 
-                <p class="lead"><strong class="text-primary">{{Auth::user()->email}}</strong> <small></small></p>
+                <p class="lead"><strong class="text-primary">{{ round($ratings / $count)}}</strong> <small>Note</small></p>
 
                 <p class="lead">
                     <i class="fa fa-briefcase"></i> <a href="{{$profil->cv}}" download>Télécharger votre CV </a> &nbsp;&nbsp;
-                    <!-- <i class="fa fa-map-marker"></i> London &nbsp;&nbsp;
-                    <i class="fa fa-calendar"></i> 20-06-2020 &nbsp;&nbsp;
-                    <i class="fa fa-file"></i> Contract -->
+                    <i class="fa fa-file"></i> {{Auth::user()->email}}  &nbsp;&nbsp;
+                    <!-- <i class="fa fa-map-marker"></i>   &nbsp;&nbsp;
+                    <i class="fa fa-calendar"></i> 20-06-2020 &nbsp;&nbsp;-->
                 </p>
 
             </form>
             @endforeach
             @endif
+
         </div>
     </div>
     <div class="panel panel-default">
@@ -164,4 +165,5 @@
     </div>
 </div>
 </div>
+
 @endsection

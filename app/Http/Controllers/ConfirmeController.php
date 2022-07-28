@@ -26,8 +26,8 @@ class ConfirmeController extends Controller
         $confirmes = User::leftjoin('emploies','users.id','=','emploies.user_id')
                          ->join('postulers','users.id','=','postulers.user_id')
                         //->join('chercheurs','users.id','=','chercheurs.user_id')
-                        ->select('users.name','users.activite','users.pays','users.email','emploies.user_id','emploies.title','emploies.photo','emploies.responsabilities',
-                         'emploies.salary','emploies.dure','postulers.emploie_id','postulers.user_id','postulers.id','postulers.status','postulers.created_at','postulers.cv','postulers.lettre','lettre')
+                        ->select('users.name','users.id','users.activite','users.pays','users.email','emploies.user_id','emploies.title','emploies.photo','emploies.responsabilities',
+                         'emploies.salary','emploies.dure','postulers.emploie_id','postulers.user_id','postulers.status','postulers.created_at','postulers.cv','postulers.lettre','lettre')
                          ->where('postulers.emploie_id','=',$offre)
                         //->where('emploies.user_id','=',Auth::user()->id)
                         // ->orderBy('postulers.created_at','desc')->paginate(8);
@@ -82,11 +82,11 @@ class ConfirmeController extends Controller
         $offre = $request->get('id');
         $title = $request->get('title');
        // dd($offre);
-    $exports = User::join('postulers','users.id','=','postulers.user_id')
-                    //->join('chercheurs','users.id','=','chercheurs.user_id')
+    $exports = User::leftjoin('postulers','users.id','=','postulers.user_id')
+                    ->join('emploies','users.id','=','emploies.user_id')
                     ->select('users.name','users.activite','users.pays','users.email','postulers.emploie_id','postulers.user_id','postulers.id','postulers.status','postulers.created_at','postulers.cv','postulers.lettre')
-                     ->where('postulers.emploie_id','=',$offre)->get();
-                    //->where('emploies.user_id','=',Auth::user()->id)
+                     ->where('postulers.emploie_id','=',$offre)
+                    ->where('emploies.user_id','=',Auth::user()->id)->get();
                     // ->orderBy('postulers.created_at','desc')->paginate(8);
                    // dd($exports);
 

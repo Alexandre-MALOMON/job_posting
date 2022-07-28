@@ -19,7 +19,7 @@ class ChercheurController extends Controller
     public function index()
     {
         $poste_emploies = Emploie::Join('postulers','emploies.id','=','postulers.emploie_id')
-                        ->select('emploies.title','emploies.photo','emploies.responsabilities',
+                        ->select('emploies.user_id','emploies.title','emploies.photo','emploies.responsabilities',
                         'emploies.salary','emploies.dure','postulers.user_id','postulers.status','postulers.created_at')
                         ->where('postulers.user_id','=',Auth::user()->id)
                         ->orderBy('postulers.created_at','desc')->paginate(8);

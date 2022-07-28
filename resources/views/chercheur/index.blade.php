@@ -30,15 +30,7 @@
                         @else
                         <span disabled class="btn btn-success font-weight-bold"> {{$poste_emploie->status}} </span>
                         @endif
-
                     </span><br>
-
-                  </div>
-                  <div class="ms-auto text-end">
-                    @if ($poste_emploie->status == 'Accepter')
-                    <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Méssage</a>
-                    @endif
-
                   </div>
                 </li>
                 @empty
