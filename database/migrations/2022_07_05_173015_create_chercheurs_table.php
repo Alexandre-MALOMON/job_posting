@@ -18,7 +18,7 @@ class CreateChercheursTable extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('photo');
             $table->string('cv');
-            $table->string('description');
+            $table->mediumText('description');
             $table->timestamps();
         });
     }

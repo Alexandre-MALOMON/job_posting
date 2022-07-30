@@ -21,7 +21,7 @@ class CreateEmploiesTable extends Migration
             $table->string('secteur');
             $table->text('responsabilities');
             $table->text('qualification');
-            $table->text('description');
+            $table->mediumText('description');
             $table->string('salary');
             $table->string('dure');
             $table->timestamps();

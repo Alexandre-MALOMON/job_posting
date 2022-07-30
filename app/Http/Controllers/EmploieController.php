@@ -74,7 +74,7 @@ class EmploieController extends Controller
     $job->save();
     $usersjobs = User::all();
             Jobsendmail::dispatch($job, $usersjobs, $secteur);
-    return redirect()->route('entreprise.index');
+    return redirect()->route('entreprise.index')->with('success','Publication effectuée');
     }
 
     /**
@@ -130,6 +130,6 @@ class EmploieController extends Controller
 
         }
         return redirect()->route('entreprise.index')
-                              ->with('success','Ce emploi$emploie a été supprimé') ;
+                              ->with('success','Publiation supprimée') ;
     }
 }

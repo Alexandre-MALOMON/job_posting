@@ -22,7 +22,7 @@ class CreateEntreprisesTable extends Migration
             $table->string('email');
             $table->string('localisation');
             $table->string('site_web');
-            $table->string('description');
+            $table->mediumText('description');
             $table->timestamps();
         });
     }

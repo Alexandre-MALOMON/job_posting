@@ -51,7 +51,7 @@ class ConfirmeController extends Controller
             'email' => $request->email,
             'emploie_id'=> $request->emploie_id
         ];
-       // dd($infos);
+        dd($infos);
 
         if($request->status == 'Accepter'){
 

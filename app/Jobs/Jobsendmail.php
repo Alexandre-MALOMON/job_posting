@@ -43,12 +43,8 @@ class Jobsendmail implements ShouldQueue
     public function handle()
     {
 
-        foreach ( $this->usersjobs as $usersjob) {
-                if ($usersjob->activite == $this->secteur) {
+        foreach ($this->usersjobs as $usersjob) {
                    Mail::to($usersjob->email)->send(new JobPosterMail($this->created_job));
-                }else{
-                    echo "Bonjour";
-                }
 
        }
     }
