@@ -70,10 +70,9 @@ class EmploieController extends Controller
     $job->qualification = $request->qualification;
     $job->salary = $request->salary;
     $job->dure = $request->dure;
-    $secteur=$request->secteur;
     $job->save();
     $usersjobs = User::all();
-            Jobsendmail::dispatch($job, $usersjobs, $secteur);
+            Jobsendmail::dispatch($job, $usersjobs);
     return redirect()->route('entreprise.index');
     }
 
