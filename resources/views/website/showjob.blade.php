@@ -28,7 +28,7 @@ Details
                          <form action="#" method="post" class="form">
                               <h2>{{$job->title}}</h2>
 
-                              <p class="lead"><strong class="text-primary">{{$job->salary}}</strong> <small> per year</small></p>
+                              <p class="lead"><strong class="text-primary">{{$job->salary}}</strong><small></small></p>
 
                               <p class="lead">
                                    <i class="fa fa-briefcase"></i> Security / Protective Services Jobs &nbsp;&nbsp;
@@ -67,9 +67,6 @@ Details
                     @else
                         Veuillez vous connecté
                     @endauth
-
-
-
 
 
 

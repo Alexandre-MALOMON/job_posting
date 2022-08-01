@@ -58,10 +58,6 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function entreprise(){
-        return $this->hasOne(Entreprise::class);
-
-    }
 
     public function chercheur(){
         return $this->hasOne(Chercheur::class);
@@ -80,5 +76,17 @@ class User extends Authenticatable
 
     public function getConversationAttribute(){
         return $this->conversations()->get();
+    }
+
+    public function ratings(){
+        return $this->hasMany(Rating::class,'examiner');
+    }
+
+    public function postulers(){
+        return $this->hasMany(Postuler::class);
+    }
+
+    public function entreprise(){
+        return $this->hasOne(Entreprise::class);
     }
 }

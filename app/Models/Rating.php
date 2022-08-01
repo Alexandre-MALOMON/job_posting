@@ -14,4 +14,8 @@ class Rating extends Model
         'rate',
         'examinateur'
     ];
+
+    public function users(){
+        return $this->hasMany(User::class,'examiner','id');
+    }
 }

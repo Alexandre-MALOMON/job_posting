@@ -96,9 +96,9 @@ class EmploieController extends Controller
      * @param  \App\Models\Emploie  $emploie
      * @return \Illuminate\Http\Response
      */
-    public function edit(Emploie $emploie)
+    public function edit(Emploie $job)
     {
-        //
+       return view('entreprise.job.edit', compact('job'));
     }
 
     /**
@@ -108,9 +108,43 @@ class EmploieController extends Controller
      * @param  \App\Models\Emploie  $emploie
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Emploie $emploie)
+    public function update(Request $request, Emploie $job)
     {
-        //
+        // dd('asdfghj');
+        $this->validate($request, [
+            'title' => 'required',
+            'photo' => 'mimes:png,jpg,jpeg',
+            'secteur' => 'required',
+            'responsabilities' => 'required',
+            'qualification' => 'required',
+            'description' => 'required',
+            'salary' => 'required',
+            'dure' => 'required',
+
+        ]);
+
+
+    $user=Auth::user()->id;
+
+    $job->user_id = $user;
+    $job->title = $request->title;
+    if ($request->hasFile('photo')) {
+        $file = $request->photo;
+        $filename=time(). '.' .$file->getClientOriginalExtension();
+        $request->photo->move('storage/job/', $filename);
+        $job->photo = '/storage/job/'.$filename;
+    }
+    $job->secteur = $request->secteur;
+    $job->responsabilities = $request->responsabilities;
+    $job->description = $request->description;
+    $job->qualification = $request->qualification;
+    $job->salary = $request->salary;
+    $job->dure = $request->dure;
+    $job->save();
+
+    return redirect()->route('entreprise.index')
+                     ->with('success','Publication modifiée');
+
     }
 
     /**

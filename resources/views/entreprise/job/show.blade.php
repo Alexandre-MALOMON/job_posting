@@ -24,11 +24,11 @@
                          <form action="#" method="post" class="form">
                               <h2>{{$job->title}}</h2>
 
-                              <p class="lead"><strong class="text-primary">{{$job->salary}}</strong> <small> per year</small></p>
+                              <p class="lead"><strong class="text-primary">{{$job->salary}}</strong> <small> </small></p>
 
                               <p class="lead">
                                    <i class="fa fa-briefcase"></i> Security / Protective Services Jobs &nbsp;&nbsp;
-                                   <i class="fa fa-map-marker"></i> London &nbsp;&nbsp;
+                                   <i class="fa fa-map-marker"></i> {{$job->entreprise}} &nbsp;&nbsp;
                                    <i class="fa fa-calendar"></i> {{date('m-d-Y',strtotime($job->created_at))}} &nbsp;&nbsp;
                                    <i class="fa fa-file"></i> Contract
                               </p>
@@ -155,8 +155,8 @@
                     <a href="{{ route('confirme')}}?id={{Crypt::encrypt($job->id)}}&title={{Crypt::encrypt($job->title)}}" class="section-btn btn btn-primary pull-left">Postulants</a>
 
                     <ul class="social-icon pull-right">
-                         <li><a href="#" class="fa fa-facebook"></a></li>
-                         <li><a href="#" class="fa fa-envelope-o"></a></li>
+                         <!-- <li><a href="#" class="fa fa-facebook"></a></li> -->
+                         <li><a href="{{ route('job.edit',$job->id)}}" class="fa fa-edit"></a></li>
                          <li><a href="#" data-toggle="modal" data-target="#ModalDelete{{$job->id}}"><i class="fa fa-trash-o "></i></a></li>
                          @include('entreprise.job.delete')
                     </ul>

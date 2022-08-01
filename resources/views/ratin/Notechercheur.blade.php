@@ -11,7 +11,7 @@
                     </button>
                 </div>
                     <div class="modal-body rate">
-                    <input type="hidden" name="id" value="{{$confirme->id}}">
+                    <input type="hidden" name="id" value="{{$confirme->user_id}}">
                     <input type="radio" id="star5" name="rate" value="5" />
                     <label for="star5" title="text">5 stars</label>
                     <input type="radio" id="star4" name="rate" value="4" />

@@ -32,7 +32,7 @@ Job search
                         </div>
 
                         <div class="courses-detail">
-                            <h3><a href="job-details.html">{{$job->title}}t</a></h3>
+                            <h3><a href="job-details.html">{{$job->title}}</a></h3>
 
                             <p class="lead"><strong>{{$job->salary}}</strong></p>
 

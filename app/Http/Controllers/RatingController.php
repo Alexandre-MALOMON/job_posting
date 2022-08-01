@@ -13,7 +13,14 @@ class RatingController extends Controller
         $this->validate($request,[
             'rate' => 'required'
         ]);
-        $note = Rating::create([
+        /* $note = new Rating();
+
+        $note->examiner = $request->id;
+        $note->rate = $request->rate;
+        $note->examinateur = Auth::user()->id;
+
+        $note->save(); */
+         Rating::create([
             'examiner' => $request->id,
             'rate' => $request->rate,
             'examinateur' => Auth::user()->id
@@ -21,4 +28,6 @@ class RatingController extends Controller
 
         return back()->with('success','Merci');
     }
+
+
 }
