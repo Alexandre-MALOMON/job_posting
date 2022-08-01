@@ -14,6 +14,7 @@
      <link rel="stylesheet" href="{{asset('csss/owl.carousel.css')}}">
      <link rel="stylesheet" href="{{asset('csss/owl.theme.default.min.css')}}">
 
+      <!-- bootstrap -->
      <!-- MAIN CSS -->
      <link rel="stylesheet" href="{{asset('csss/style.css')}}">
     <!-- sweet alert -->

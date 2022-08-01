@@ -1,8 +1,7 @@
-
-<form action="{{ route('confirme.update',$confirme->id)}}" method="post" enctype="multipart/form-data">
-    {{method_field('put') }}
-    {{ csrf_field() }}
-    <div class="modal fade" id="ModalDelete{{$confirme->id}}" tabindex="1" role="dialog" aria-hidden="true">
+<form action="{{ route('confirme.update',$confirme->num)}}" method="post" >
+   @csrf
+   @method('PUT')
+    <div class="modal fade" id="ModalDelete{{$confirme->num}}" tabindex="1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -11,8 +10,8 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">voulez-vous accepter ou refuser cette demande?<br>
-                <input type="hidden" name="id" value="{{$confirme->user_id}}">
+                <div class="modal-body">voulez-vous accepter ou refuser la demande de ̌̌̌{{$confirme->name}} ?<br>
+                <input type="hidden" name="id" value="{{$confirme->id}}">
                 <input type="hidden" name="emploie_id" value="{{$confirme->emploie_id}}">
                 <input type="hidden" name="email" value="{{$confirme->email}}">
                 <input type="hidden" name="name" value="{{$confirme->name}}">

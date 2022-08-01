@@ -39,7 +39,7 @@ class Jobsendmail implements ShouldQueue
      * @return void
      */
     public function handle()
-    { dd('bon');
+    { 
 
         foreach ( $this->usersjobs as $usersjob) {
 

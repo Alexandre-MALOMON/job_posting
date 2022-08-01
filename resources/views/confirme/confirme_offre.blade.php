@@ -11,20 +11,29 @@
         <div class="col-md-7 mt-4">
           <div class="card">
             <div class="card-header pb-0 px-3">
-              <h6 class="mb-0">Postulant</h6>
+              <h6 class="mb-0">Postulant ({{$count}})</h6>
             </div>
             <div class="card-body pt-4 p-3">
               <ul class="list-group">
                @forelse ( $confirmes as $confirme)
 
 
+
+
                 <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
                   <div class="d-flex flex-column">
                     <h6 class="mb-3 text-sm">{{$confirme->name}}</h6>
+                        @if ($confirme->ratings->count() > 0)
+                        <span class="mb-2 text-xs">Note: <span class="text-dark font-weight-bold ms-sm-2">{{ round($confirme->ratings->sum('rate') / $confirme->ratings->count())}} <i class="fa fa-star" style="color: yellow;"></i><i class="fa fa-star" style="color: yellow;"></i><i class="fa fa-star" style="color: yellow;"></i></span></span><br>
+                        @else
+                        <span class="mb-2 text-xs">Note: <span class="text-dark font-weight-bold ms-sm-2">0<i class="fa fa-star" style="color: yellow;"></i><i class="fa fa-star" style="color: yellow;"></i><i class="fa fa-star" style="color: yellow;"></i></span></span><br>
+                        @endif
+
+
                     <span class="mb-2 text-xs">Profession: <span class="text-dark font-weight-bold ms-sm-2">{{$confirme->activite}}</span></span><br>
                     <span class="mb-2 text-xs">Nationnalité: <span class="text-dark ms-sm-2 font-weight-bold">{{$confirme->pays}}</span></span><br>
                     <span class="text-xs">Télécharger le cv: <span class="text-dark ms-sm-2 font-weight-bold"> <a class="btn btn-info" href="{{$confirme->cv}}" download="">Téléchargé</a> </span></span><br>
-                    <span class="text-xs">Lire le cv: <span class="text-dark ms-sm-2 font-weight-bold"> <a  class="btn btn-info" target="blank" href="{{ route('confirme.show',$confirme->id)}}" >Lire</a> </span></span><br>
+                    <span class="text-xs">Lire le cv: <span class="text-dark ms-sm-2 font-weight-bold"> <a  class="btn btn-info" target="blank" href="{{ route('confirme.show', $confirme->id)}}" >Lire</a> </span></span><br>
                     <span class="text-xs">Lettre de motivation: <span class="text-dark ms-sm-2 font-weight-bold">
                         <div>
                         {{$confirme->lettre}}
@@ -45,8 +54,8 @@
 
                   </div>
                   <div class="ms-auto text-end">
-                  <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#ModalDelete{{$confirme->id}}">Décision</a>
-                  @include('entreprise.confirme.decision')
+                  <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#ModalDelete{{$confirme->num}}">Décision</a>
+                  @include('confirme.decision')
                   </div>
                 </li>
                 @empty
@@ -60,10 +69,11 @@
 <div style="text-align: center;font-weight: bold;">
     <p >{{$confirmes->links()}}</p>
     @if ($confirmes->count() > 0)
-         <a href="{{ route('export.postuler')}}?id={{$offre}}">Exporter</a>
+         <a class="btn btn-success" href="{{ route('export.postuler')}}?id={{$offre}}&title={{$title}}">Exporter en Excel</a>
     @endif
 
 </div>
  </section>
+
 
  @endsection

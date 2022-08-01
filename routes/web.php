@@ -16,9 +16,11 @@ use App\Http\Controllers\LinkedinController;
 //Route protégée//entreprise
 Route::middleware(['auth','entreprise'])->group(function(){
     Route::get('confirme/postuler', 'ConfirmeController@exportPostulerListToExcel')->name('export.postuler');
-    Route::get('confirme/show/{confirme}', 'ConfirmeController@liredoc')->name('confirme.show');
+   Route::get('confirme/show/{confirme}', 'ConfirmeController@liredoc')->name('confirme.show');
     Route::put('confirme/update/{confirme}', 'ConfirmeController@update')->name('confirme.update');
     Route::get('confirme', 'ConfirmeController@index')->name('confirme');
+
+
     Route::resource('entreprise', EntrepriseController::class);
     //Route::resource('job', JobController::class);
     Route::resource('job', EmploieController::class);
@@ -33,6 +35,7 @@ Route::middleware(['auth'])->group( function(){
 //postuler sur les offres
 Route::post('raiting','RatingController@store')->name('raiting.store');
 
+
 Route::post('postuler','WebsiteController@postuler')->name('website.postuler');
 Route::get('website/apply/{job}','WebsiteController@apply')->name('website.apply');
 Route::get('website/profil','WebsiteController@profil')->name('website.profil');
@@ -46,7 +49,7 @@ Route::get('conversations/show/{conversation}','ConversationController@show')->n
 });
 //Routes publique
     //job
-
+    Route::post('search','WebsiteController@search')->name('search');
     Route::get('/','WebsiteController@acceuill')->name('website.index');
     Route::get('website/job','WebsiteController@job')->name('website.job');
     Route::get('website/about','WebsiteController@about')->name('website.about');

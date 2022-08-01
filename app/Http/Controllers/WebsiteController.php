@@ -7,6 +7,7 @@ use App\Models\Emploie;
 use App\Models\Entreprise;
 use App\Models\Postuler;
 use App\Models\Rating;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -59,6 +60,7 @@ class WebsiteController extends Controller
 
     public function postuler(Request $request){
         $this->validate($request,[
+            'cv' => 'mimes:pdf',
             'lettre'=>'required',
         ]);
 
@@ -86,12 +88,31 @@ class WebsiteController extends Controller
 
     public function mission(){
         $poste_emploies = Emploie::Join('postulers','emploies.id','=','postulers.emploie_id')
-        ->select('emploies.title','emploies.photo','emploies.responsabilities',
-        'emploies.salary','emploies.dure','postulers.user_id','postulers.status','postulers.created_at')
-        ->where('postulers.user_id','=',Auth::user()->id)
-        ->orderBy('postulers.created_at','desc')->paginate(8);
-        // dd($poste_emploies);
-        return view('chercheur.index',compact('poste_emploies'));
+            ->select('emploies.title','emploies.photo','emploies.responsabilities',
+            'emploies.salary','emploies.dure','postulers.user_id','postulers.status','postulers.created_at')
+            ->where('postulers.user_id','=',Auth::user()->id)
+            ->orderBy('postulers.created_at','desc')->paginate(8);
+            // dd($poste_emploies);
+        $count = Emploie::Join('postulers','emploies.id','=','postulers.emploie_id')
+            ->select('emploies.title','emploies.photo','emploies.responsabilities',
+            'emploies.salary','emploies.dure','postulers.user_id','postulers.status','postulers.created_at')
+            ->where('postulers.user_id','=',Auth::user()->id)
+            ->orderBy('postulers.created_at','desc')->count();
+            // dd($poste_emploies);
+        return view('chercheur.index',compact('poste_emploies','count'));
+    }
+
+    public function search(Request $request){
+
+        $q = $request->input('q');
+        $jobs = Emploie::where('title','like', '%' . $q .'%')
+        ->orwhere('secteur','like', '%' . $q .'%')->paginate(10);
+        //dd($jobs);
+
+        return view('website.search',compact('jobs','q'));
+
+
+
     }
 
 }

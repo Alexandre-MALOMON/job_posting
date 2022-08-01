@@ -14,26 +14,34 @@ use Illuminate\Support\Facades\Mail;
 use App\Exports\PostulersExport;
 use App\Models\Conversation;
 use App\Models\Message;
+use App\Models\Rating;
 use Illuminate\Support\Facades\Crypt;
 use Maatwebsite\Excel\Facades\Excel;
+use Rap2hpoutre\FastExcel\FastExcel;
 
 class ConfirmeController extends Controller
 {
-    public function index(Request $request){
+    public function index(Request $request, User $confirme){
             $offre = Crypt::decrypt($request->get('id'));
             $title = Crypt::decrypt($request->get('title'));
            // dd($offre);
         $confirmes = User::leftjoin('emploies','users.id','=','emploies.user_id')
                          ->join('postulers','users.id','=','postulers.user_id')
-                        //->join('chercheurs','users.id','=','chercheurs.user_id')
                         ->select('users.name','users.id','users.activite','users.pays','users.email','emploies.user_id','emploies.title','emploies.photo','emploies.responsabilities',
-                         'emploies.salary','emploies.dure','postulers.emploie_id','postulers.user_id','postulers.status','postulers.created_at','postulers.cv','postulers.lettre','lettre')
+                         'emploies.salary','emploies.dure','postulers.emploie_id','postulers.user_id','postulers.status','postulers.created_at','postulers.cv','postulers.lettre','postulers.id AS num','lettre')
                          ->where('postulers.emploie_id','=',$offre)
-                        //->where('emploies.user_id','=',Auth::user()->id)
-                        // ->orderBy('postulers.created_at','desc')->paginate(8);
                         ->orderBy('created_at', 'desc')->paginate(6);
-       // dd($confirmes);
-        return view('entreprise.confirme.confirme_offre',compact('confirmes','title','offre'));
+
+        $count = User::leftjoin('emploies','users.id','=','emploies.user_id')
+                        ->join('postulers','users.id','=','postulers.user_id')
+                       ->select('users.name','users.id','users.activite','users.pays','users.email','emploies.user_id','emploies.title','emploies.photo','emploies.responsabilities',
+                        'emploies.salary','emploies.dure','postulers.emploie_id','postulers.user_id','postulers.status','postulers.created_at','postulers.cv','postulers.lettre','postulers.id AS num','lettre')
+                        ->where('postulers.emploie_id','=',$offre)
+                       ->orderBy('created_at', 'desc')->count();
+
+                        $confirmes->appends(['id' => Crypt::encrypt($offre),'title'=>Crypt::encrypt($title)])->render();
+        return view('confirme.confirme_offre',compact('confirmes','title','offre','count'));
+
     }
 
     public function update(Request $request, Postuler $confirme){
@@ -41,9 +49,11 @@ class ConfirmeController extends Controller
         $request->validate([
             'status' => 'required',
         ]);
+
         $confirme->update([
             'status' => $request->status,
         ]);
+
         $infos=[
             'id'=> $request->id,
             'title'=> $request->title,
@@ -51,7 +61,7 @@ class ConfirmeController extends Controller
             'email' => $request->email,
             'emploie_id'=> $request->emploie_id
         ];
-       // dd($infos);
+
 
         if($request->status == 'Accepter'){
 
@@ -75,21 +85,26 @@ class ConfirmeController extends Controller
     }
 
     public function liredoc(Postuler $confirme){
-            return view('entreprise.confirme.show',compact('confirme'));
+
+        return view('confirme.show',compact('confirme'));
     }
 
-    public function exportPostulerListToExcel(Request $request) {
-        $offre = $request->get('id');
-        $title = $request->get('title');
-       // dd($offre);
-    $exports = User::leftjoin('postulers','users.id','=','postulers.user_id')
-                    ->join('emploies','users.id','=','emploies.user_id')
-                    ->select('users.name','users.activite','users.pays','users.email','postulers.emploie_id','postulers.user_id','postulers.id','postulers.status','postulers.created_at','postulers.cv','postulers.lettre')
-                     ->where('postulers.emploie_id','=',$offre)
-                    ->where('emploies.user_id','=',Auth::user()->id)->get();
-                    // ->orderBy('postulers.created_at','desc')->paginate(8);
-                   // dd($exports);
+    public function exportPostulerListToExcel() {
 
-        return EXCEL::download(new PostulerExport($exports), 'postuler.xlsx');
+        /* $id = request()->get('id');
+        $title = request()->get('title');
+        /* $export = Postuler::select('user_id','cv','lettre','status')->get();
+        $exportExcel = $export->where('emploie_id', '=', $id);
+        dd($exportExcel); 
+        $exportExcel = User::leftjoin('emploies','users.id','=','emploies.user_id')
+                         ->join('postulers','users.id','=','postulers.user_id')
+                        ->select('users.name','users.id','users.activite','users.pays','users.email','emploies.user_id','emploies.title','emploies.photo','emploies.responsabilities',
+                         'emploies.salary','emploies.dure','postulers.emploie_id','postulers.user_id','postulers.status','postulers.created_at','postulers.cv','postulers.lettre','postulers.id AS num','lettre')
+                         ->where('postulers.emploie_id','=',$id)
+                        ->orderBy('created_at', 'desc')->get();
+                        dd(download($exportExcel));
+       // return EXCEL::download(new PostulerExport, 'postuler.xlsx');
+       return  fastexcel($exportExcel)->download('postuler.xlsx');
+     /* return new FastExcel($exportExcel); */
     }
 }
