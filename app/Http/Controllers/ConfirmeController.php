@@ -97,7 +97,7 @@ class ConfirmeController extends Controller
         $exportExcel = Emploie::leftjoin('users','users.id','=','emploies.user_id')
             ->join('postulers','users.id','=','postulers.user_id')
             ->select('users.name','users.activite','users.pays','users.email','emploies.title',
-            'emploies.salary','emploies.dure','postulers.status','postulers.created_at','postulers.cv','postulers.lettre')
+            'emploies.salary','emploies.dure','postulers.status','postulers.lettre','postulers.created_at')
             ->where('postulers.emploie_id','=',$id)
             ->orderBy('created_at', 'desc')->get();
        return  fastexcel($exportExcel)->download('postuler.xlsx');
