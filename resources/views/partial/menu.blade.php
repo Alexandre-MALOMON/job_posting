@@ -38,9 +38,10 @@
                      <ul class="dropdown-menu">
                          @if (Auth::user()->status == "Recruteur")
                          <li><a href="{{ route('entreprise.index')}}">Mon espace</a></li>
-                         @endif
-                         @if (Auth::user()->status == "Chercheur d'emploie")
+                         @elseif (Auth::user()->status == "Chercheur d'emploie")
                          <li><a href="{{ route('chercheur.index')}}">Mon espace</a></li>
+                         @else
+                         compte invalide
                          @endif
                          <li>
                              <form method="POST" action="{{ route('logout') }}">
