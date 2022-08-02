@@ -91,20 +91,15 @@ class ConfirmeController extends Controller
 
     public function exportPostulerListToExcel() {
 
-        /* $id = request()->get('id');
+         $id = request()->get('id');
         $title = request()->get('title');
-        /* $export = Postuler::select('user_id','cv','lettre','status')->get();
-        $exportExcel = $export->where('emploie_id', '=', $id);
-        dd($exportExcel); 
-        $exportExcel = User::leftjoin('emploies','users.id','=','emploies.user_id')
-                         ->join('postulers','users.id','=','postulers.user_id')
-                        ->select('users.name','users.id','users.activite','users.pays','users.email','emploies.user_id','emploies.title','emploies.photo','emploies.responsabilities',
-                         'emploies.salary','emploies.dure','postulers.emploie_id','postulers.user_id','postulers.status','postulers.created_at','postulers.cv','postulers.lettre','postulers.id AS num','lettre')
-                         ->where('postulers.emploie_id','=',$id)
-                        ->orderBy('created_at', 'desc')->get();
-                        dd(download($exportExcel));
-       // return EXCEL::download(new PostulerExport, 'postuler.xlsx');
+
+        $exportExcel = Emploie::leftjoin('users','users.id','=','emploies.user_id')
+            ->join('postulers','users.id','=','postulers.user_id')
+            ->select('users.name','users.activite','users.pays','users.email','emploies.title',
+            'emploies.salary','emploies.dure','postulers.status','postulers.created_at','postulers.cv','postulers.lettre')
+            ->where('postulers.emploie_id','=',$id)
+            ->orderBy('created_at', 'desc')->get();
        return  fastexcel($exportExcel)->download('postuler.xlsx');
-     /* return new FastExcel($exportExcel); */
     }
 }
