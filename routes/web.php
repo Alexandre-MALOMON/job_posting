@@ -14,7 +14,7 @@ use App\Http\Controllers\LinkedinController;
 |
 */
 //Route protégée//entreprise
-Route::middleware(['auth','entreprise'])->group(function(){
+Route::middleware(['auth','entreprise','invalide'])->group(function(){
     Route::get('confirme/postuler', 'ConfirmeController@exportPostulerListToExcel')->name('export.postuler');
    Route::get('confirme/show/{confirme}', 'ConfirmeController@liredoc')->name('confirme.show');
     Route::put('confirme/update/{confirme}', 'ConfirmeController@update')->name('confirme.update');
@@ -26,26 +26,28 @@ Route::middleware(['auth','entreprise'])->group(function(){
     Route::resource('job', EmploieController::class);
 });
 //chercheur
-Route::middleware(['auth','cherheur'])->group(function(){
+Route::middleware(['auth','cherheur','invalide'])->group(function(){
 
     Route::resource('chercheur', ChercheurController::class);
 });
 
-Route::middleware(['auth'])->group( function(){
+Route::middleware(['auth','invalide'])->group( function(){
 //postuler sur les offres
 Route::post('raiting','RatingController@store')->name('raiting.store');
-
-
 Route::post('postuler','WebsiteController@postuler')->name('website.postuler');
 Route::get('website/apply/{job}','WebsiteController@apply')->name('website.apply');
 Route::get('website/profil','WebsiteController@profil')->name('website.profil');
-Route::resource('user', InfosController::class);
+
 Route::get('mission','WebsiteController@mission')->name('mission');
 //conversation
 
 Route::get('conversations','ConversationController@index')->name('conversation.index');
 Route::get('conversations/show/{conversation}','ConversationController@show')->name('conversation.show');
 
+});
+Route::middleware('auth')->group( function(){
+    Route::get('invalide','WebsiteController@invalide')->name('website.invalide');
+    Route::resource('user', InfosController::class);
 });
 //Routes publique
     //job
@@ -62,7 +64,6 @@ Route::get('conversations/show/{conversation}','ConversationController@show')->n
     Route::fallback(function() {
         return view('404'); // la vue 404.blade.php
      });
-
 
 
 Route::get('/dashboard', function () {

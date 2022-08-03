@@ -60,7 +60,7 @@ class WebsiteController extends Controller
 
     public function postuler(Request $request){
         $this->validate($request,[
-            'cv' => 'mimes:pdf',
+            
             'lettre'=>'required',
         ]);
 
@@ -110,9 +110,11 @@ class WebsiteController extends Controller
         //dd($jobs);
 
         return view('website.search',compact('jobs','q'));
+    }
 
+    public function invalide(){
 
-
+        return view('website.invalide');
     }
 
 }
