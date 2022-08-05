@@ -23,8 +23,11 @@
             <form action="#" method="post" class="form">
                 <h2>{{$profil->company}}</h2>
 
-                <p class="lead"><strong class="text-primary">{{ round($ratings / $count)}}</strong> <small> <i class="fa fa-star" style="color: yellow;"></i><i class="fa fa-star" style="color: yellow;"></i><i class="fa fa-star" style="color: yellow;"></i></small></p>
-
+                <p class="lead">@if ($count > 0)
+                <strong class="text-primary">{{ round($ratings / $count)}}</strong> <small><i class="fa fa-star" style="color: yellow;"></i><i class="fa fa-star" style="color: yellow;"></i><i class="fa fa-star" style="color: yellow;"></i></small></p>
+                @else
+                <strong class="text-primary">0</strong> <small><i class="fa fa-star" style="color: yellow;"></i><i class="fa fa-star" style="color: yellow;"></i><i class="fa fa-star" style="color: yellow;"></i></small></p>
+                @endif
                 <p class="lead">
                     <i class="fa fa-briefcase"></i> {{$profil->site_web}} &nbsp;&nbsp;
                     <i class="fa fa-map-marker"></i> {{$profil->localisation}} &nbsp;&nbsp;

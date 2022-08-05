@@ -39,14 +39,16 @@
                         {{$confirme->lettre}}
 
                     </div> </span></span><br>
-                    <span class="text-xs">Status:
+                    <span class="text-xs" >Status:
+
+
                         @if ($confirme->status == 'Refuser')
-                        <span disabled class="btn btn-danger font-weight-bold"  style="margin-bottom: 10px;"> {{$confirme->status }} </span>
+                        <span disabled class="btn btn-danger font-weight-bold"  style="margin-bottom: 10px;">{{$confirme->status }} </span>
                         @else
-                        <span disabled class="btn btn-success font-weight-bold " style="margin-bottom: 10px;"> {{$confirme->status}} </span>
+                        <span disabled class="btn btn-success font-weight-bold " style="margin-bottom: 10px;">{{$confirme->status}} </span>
                         @endif
                         @if ($confirme->status == 'Accepter')
-                        <a href="#" class="btn btn-info" data-toggle="modal" data-target="#ModalNote{{$confirme->id}}">Noté</a>
+                        <a style="margin-bottom: 10px;" href="#" class="btn btn-info" data-toggle="modal" data-target="#ModalNote{{$confirme->id}}">Noté</a>
                         @include('ratin.Notechercheur')
 
                         @endif

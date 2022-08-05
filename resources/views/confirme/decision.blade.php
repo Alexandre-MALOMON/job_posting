@@ -1,4 +1,4 @@
-<form action="{{ route('confirme.update',$confirme->num)}}" method="post" >
+<form action="{{ route('confirme.update',$confirme->num)}}" method="post" class="form-check">
    @csrf
    @method('PUT')
     <div class="modal fade" id="ModalDelete{{$confirme->num}}" tabindex="1" role="dialog" aria-hidden="true">
@@ -17,13 +17,13 @@
                 <input type="hidden" name="name" value="{{$confirme->name}}">
                 <input type="hidden" name="title" value="{{$title}}">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="status" id="flexRadioDefault1" value="Refuser">
+                        <input class="form-check-input" type="radio" name="status" id="flexRadioDefault1" value="Refuser">
                         <label class="form-check-label" for="flexRadioDefault1">
                             Refuser
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="status" id="flexRadioDefault2" value="Accepter">
+                        <input class="form-check-input" type="radio" name="status" id="flexRadioDefault2" value="Accepter">
                         <label class="form-check-label" for="flexRadioDefault2">
                             Accepter
                         </label>
